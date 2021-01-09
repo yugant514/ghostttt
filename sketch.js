@@ -23,24 +23,24 @@ function preload(){
 
 
 function setup(){
-  createCanvas(500,500);
+  createCanvas(windowWidth,windowHeight);
   
   
   
-  tower = createSprite(250,300);
+  tower = createSprite(width/2,height/2);
   tower.addImage("tower",towerImg);
   tower.velocityY = speed;
   tower.scale = 0.8;
   
-  ghost = createSprite(300,430,50,50);
+  ghost = createSprite(width/2,height-50,5,5);
   ghost.addImage("ghost", ghostImg);
   ghost.scale = 0.3;
   ghost.bounciness = 0.5;
   
-    ghost.setCollider("rectangle", 0, 8, 150, 280)
+    ghost.setCollider("rectangle",0,0,ghost.width,ghost.height)
 
   
-  invisibleGround = createSprite(250,480,380,1);
+  invisibleGround = createSprite(width/2,height-20,width,1);
   invisibleGround.visible = false;
   
  
@@ -57,16 +57,14 @@ function setup(){
 
 function draw(){
   background(0);
-  
+        ghost.collide(invisibleGround)
+
   if (gameState === "play") {
       
-      ghost.collide(invisibleGround);
-      if(frameCount>300){
-        invisibleGround.scale = 0.001;
-      }
+     
     
-      if(tower.y > 400){
-         tower.y = 300;
+      if(tower.y > height){
+         tower.y = height/2;
       }
       
       if(keyDown("left_arrow")){
@@ -94,7 +92,7 @@ function draw(){
         //ghost.velocityY = 0;
       }
 
-      if(blockGroup.isTouching(ghost) || ghost.y>500 ){
+      if(blockGroup.isTouching(ghost) ){
         gameState = "end";
       }
     
@@ -129,7 +127,7 @@ function draw(){
 function spawnDoors() {
   
   if (frameCount % 100 === 0) {
-    var rand = Math.round(random(120,400));
+    var rand = Math.round(random(50,width-50));
     
     var door = createSprite(rand, -50);
     var climber = createSprite(rand, door.y+door.height/2);
