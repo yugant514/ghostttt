@@ -30,7 +30,7 @@ function setup(){
   tower = createSprite(width/2,height/2);
   tower.addImage("tower",towerImg);
   tower.velocityY = speed;
-  tower.scale = 0.8;
+  tower.scale=1.2
   
   ghost = createSprite(width/2,height-50,5,5);
   ghost.addImage("ghost", ghostImg);
@@ -63,8 +63,8 @@ function draw(){
       
      
     
-      if(tower.y > height){
-         tower.y = height/2;
+      if(tower.y > height-100){
+         tower.y =height/2;
       }
       
       if(keyDown("left_arrow")){
@@ -127,7 +127,7 @@ function draw(){
 function spawnDoors() {
   
   if (frameCount % 100 === 0) {
-    var rand = Math.round(random(100,width-100));
+    var rand = Math.round(random(120,width-120));
     
     var door = createSprite(rand, -50);
     var climber = createSprite(rand, door.y+door.height/2);
