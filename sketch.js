@@ -102,7 +102,7 @@ function draw(){
     
     fill("orange");
     textSize(30);
-    text("Game Over", 160, 250);
+    text("Game Over", width/2, height/2);
     
     tower.visible = false;
     ghost.visible = false;
@@ -127,7 +127,7 @@ function draw(){
 function spawnDoors() {
   
   if (frameCount % 100 === 0) {
-    var rand = Math.round(random(50,width-50));
+    var rand = Math.round(random(100,width-100));
     
     var door = createSprite(rand, -50);
     var climber = createSprite(rand, door.y+door.height/2);
